@@ -1,0 +1,7 @@
+name: VMD2D
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - opencv
+  - matplotlib
