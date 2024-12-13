@@ -1,7 +1,10 @@
 import numpy as np
 from numpy.fft import fft2, ifft2, fftshift, ifftshift
 
-def VMD2D(signal, alpha, tau, K, DC, init, tol, eps):
+def VMD2D(
+    signal: np.ndarray, 
+    alpha: float, tau: float, K: int, DC: bool, init: int, tol: float, eps: float
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     #
     # Input and Parameters:
     # ---------------------
@@ -20,6 +23,16 @@ def VMD2D(signal, alpha, tau, K, DC, init, tol, eps):
     #  u_hat   - spectra of the modes
     #  omega   - estimated mode center-frequencies
     #
+
+    # Validate input parameters
+    if not isinstance(signal, np.ndarray) or signal.ndim != 2:
+        raise ValueError("Signal must be a 2D numpy array")
+    if alpha <= 0:
+        raise ValueError("Alpha must be positive")
+    if K < 1:
+        raise ValueError("K must be at least 1")
+    if tol <= 0:
+        raise ValueError("Tolerance must be positive")
 
     # Image resolution
     Hy, Hx = signal.shape

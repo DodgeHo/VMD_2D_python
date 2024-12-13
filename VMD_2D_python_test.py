@@ -3,11 +3,19 @@ from VMD2D import VMD2D
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
+import argparse
 
 # Replace 'VMD_2D' with your Python implementation of the VMD_2D function
 
 # Read the image
-image = cv2.imread('Sample.bmp')
+try:
+    image = cv2.imread('Sample.bmp')
+    if image is None:
+        raise FileNotFoundError("Could not load image file")
+except Exception as e:
+    print(f"Error loading image: {e}")
+    sys.exit(1)
 
 # Convert to grayscale if it's a color image
 if image.ndim == 3:
